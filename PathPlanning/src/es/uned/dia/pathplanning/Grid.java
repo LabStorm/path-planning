@@ -1,5 +1,9 @@
 package es.uned.dia.pathplanning;
 
+import java.util.ArrayList;
+
+import es.uned.dia.pathplanning.CellInGrid.CellType;
+
 public class Grid {
 	public CellInGrid[][] cells;
 	public final int LEFT = 0;
@@ -9,7 +13,15 @@ public class Grid {
 
 	public float delta_x = 1;
 	public float delta_y = 1;
-
+	
+	private ArrayList<CellInGrid> sources;
+	private ArrayList<CellInGrid> sinks;
+	
+	public Grid () {
+		this.sources = new ArrayList<> ();
+		this.sinks = new ArrayList<> ();
+	}
+	
 	public CellInGrid[] getNeighbours(CellInGrid cell) {
 		return getNeighbours(cell.getRow(), cell.getColumn());
 	}
@@ -25,9 +37,44 @@ public class Grid {
 		if (i < cells.length-1) {
 			neighbours[RIGHT] = cells[i+1][j];
 		}
-		if (j > cells[i].length-1) {
+		if (j < cells[i].length-1) {
 			neighbours[DOWN] = cells[i][j+1];
 		}
 		return neighbours;
+	}
+	
+	public CellInGrid[] getSinks () {
+		return this.sinks.toArray(new CellInGrid[this.sinks.size()]);
+	}
+	
+	public CellInGrid[] getSources () {
+		return this.sources.toArray(new CellInGrid[this.sources.size()]);
+	}
+	
+	public void setSource (int i, int j) {
+		CellInGrid source = this.cells[i][j];
+		
+		if (source.type == CellType.SOURCE) return;
+		
+		if (source.type == CellType.SINK) {
+			this.sinks.remove(source);
+		}
+		source.type = CellInGrid.CellType.SOURCE;
+		
+		this.sources.add (source);
+	}
+	
+	public void setSink (int i, int j) {
+		CellInGrid sink = this.cells[i][j];
+		
+		if (sink.type == CellType.SINK) return;
+		
+		if (sink.type == CellType.SOURCE) {
+			this.sources.remove(sink);
+		}
+		
+		sink.type = CellInGrid.CellType.SINK;
+		
+		this.sinks.add (sink);
 	}
 }

@@ -12,9 +12,4 @@ public class Cell {
 		this.state = CellState.Open;
 		this.speed = 1;
 	}
-
-	public static void main(String args[]) {
-		System.out.println("HOla");
-	}
-
 }
