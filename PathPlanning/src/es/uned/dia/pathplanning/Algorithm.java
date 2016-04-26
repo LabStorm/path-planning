@@ -144,11 +144,11 @@ public class Algorithm {
 		fmm.run();
 		System.out.println((System.nanoTime() - startTime)/1e6);
 		
-		/*for (int i = 0; i < rows; i++) {
+		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
 				System.out.print(g.cells[i][j].cell.time + " ");
 			}
 			System.out.println();
-		}*/
+		}
 	}
 }
