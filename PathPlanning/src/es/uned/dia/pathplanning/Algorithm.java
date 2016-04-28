@@ -123,7 +123,7 @@ public class Algorithm {
 	public static void main (String[] args) {
 		Grid g = new Grid ();
 		
-		int rows = 512, columns = 512;
+		int rows = 40, columns = 40;
 		
 		g.cells = new CellInGrid[rows][];
 		for (int i = 0; i < rows; i++) {

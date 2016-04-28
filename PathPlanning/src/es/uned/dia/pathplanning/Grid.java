@@ -14,10 +14,12 @@ public class Grid {
 	public float delta_x = 1;
 	public float delta_y = 1;
 	
+	private ArrayList<CellInGrid> obstacles;
 	private ArrayList<CellInGrid> sources;
 	private ArrayList<CellInGrid> sinks;
 	
 	public Grid () {
+		this.obstacles = new ArrayList<> ();
 		this.sources = new ArrayList<> ();
 		this.sinks = new ArrayList<> ();
 	}
@@ -43,12 +45,22 @@ public class Grid {
 		return neighbours;
 	}
 	
+	public CellInGrid[] getObstacles () {
+		return this.obstacles.toArray(new CellInGrid[this.obstacles.size()]);
+	}
+	
 	public CellInGrid[] getSinks () {
 		return this.sinks.toArray(new CellInGrid[this.sinks.size()]);
 	}
 	
 	public CellInGrid[] getSources () {
 		return this.sources.toArray(new CellInGrid[this.sources.size()]);
+	}
+	
+	public void setObstacle (int i, int j) {
+		CellInGrid obstacle = this.cells[i][j];
+		
+		th
 	}
 	
 	public void setSource (int i, int j) {
