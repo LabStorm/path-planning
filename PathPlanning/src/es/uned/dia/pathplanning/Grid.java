@@ -60,7 +60,16 @@ public class Grid {
 	public void setObstacle (int i, int j) {
 		CellInGrid obstacle = this.cells[i][j];
 		
-		th
+		if (obstacle.type == CellType.OBSTACLE) return;
+		
+		if (obstacle.type == CellType.SINK) {
+			this.sinks.remove (obstacle);
+		} else if (obstacle.type == CellType.SOURCE) {
+			this.sources.remove (obstacle);
+		}
+		obstacle.type = CellType.OBSTACLE;
+		
+		this.obstacles.add (obstacle);
 	}
 	
 	public void setSource (int i, int j) {
@@ -69,7 +78,7 @@ public class Grid {
 		if (source.type == CellType.SOURCE) return;
 		
 		if (source.type == CellType.SINK) {
-			this.sinks.remove(source);
+			this.sinks.remove (source);
 		}
 		source.type = CellInGrid.CellType.SOURCE;
 		
